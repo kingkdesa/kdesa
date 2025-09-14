@@ -19,13 +19,13 @@ export default function ProjectPage() {
 
   return (
     <PageTransition>
-      <main className="container mx-auto px-6 py-16">
-        <h1 className="text-4xl font-bold mb-4">{project.title}</h1>
-        <p className="text-lg text-gray-300 max-w-2xl mb-8">
+      <main className="container mx-auto px-6 py-20">
+        <h1 className="text-5xl font-bold mb-6">{project.title}</h1>
+        <p className="text-lg text-gray-300 max-w-2xl mb-10">
           {project.description}
         </p>
 
-        <div className="flex flex-wrap gap-2 mb-10">
+        <div className="flex flex-wrap gap-2 mb-12">
           {project.technologies.map((tech) => (
             <span
               key={tech}
@@ -45,7 +45,7 @@ export default function ProjectPage() {
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block mt-8 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl font-semibold hover:scale-105 transition-transform"
+            className="inline-block mt-10 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl font-semibold hover:scale-105 transition-transform"
           >
             View Project →
           </a>
