@@ -4,7 +4,7 @@ import Image from "next/image"
 
 export default function ImageBlock({ src, alt, caption }) {
   return (
-    <figure className="my-8">
+    <figure className="my-12">
       <div className="relative w-full h-[400px] rounded-2xl overflow-hidden shadow-lg">
         <Image
           src={src}
@@ -15,7 +15,7 @@ export default function ImageBlock({ src, alt, caption }) {
         />
       </div>
       {caption && (
-        <figcaption className="mt-3 text-sm text-center text-gray-400">
+        <figcaption className="mt-4 text-sm text-center text-gray-400">
           {caption}
         </figcaption>
       )}
