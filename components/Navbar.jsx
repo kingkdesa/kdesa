@@ -1,51 +1,84 @@
-'use client';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import React, { useState, useEffect } from 'react';
-import { FiMenu, FiX } from 'react-icons/fi';
+"use client"
+import Link from "next/link"
+import { useState } from "react"
 
-export default function Navbar(){
-  const [scrolled, setScrolled] = useState(false);
-  const [megaOpen, setMegaOpen] = useState(false);
-  useEffect(()=>{ function onScroll(){ setScrolled(window.scrollY>40); } window.addEventListener('scroll', onScroll); onScroll(); return ()=> window.removeEventListener('scroll', onScroll); },[]);
+export default function Navbar() {
+  const [megaOpen, setMegaOpen] = useState(false)
 
-  const path = usePathname();
-  const [open, setOpen] = useState(false);
   return (
-    <header className="fixed w-full z-50 top-0 left-0 backdrop-blur bg-black/30 border-b border-white/6">
-      <div className="container flex items-center justify-between py-4">
-        <Link href="/" className="font-display text-xl font-bold tracking-tight" data-cursor="hover">kdesa</Link>
-        <nav className={"hidden md:flex gap-8 items-center text-gray-300 transition-all "+(scrolled? 'text-white':'')}>
-          <Link href="/projects" data-cursor="hover" className={path==='/projects'?'text-white':''}>Projects</Link>
-          <Link href="/about" data-cursor="hover" className={path==='/about'?'text-white':''}>About</Link>
-          <Link href="/contact" data-cursor="hover" className={path==='/contact'?'text-white':''}>Contact</Link>
-          <a href="#" data-cursor="hover" className="px-4 py-2 rounded-full bg-gradient-to-r from-[var(--accent-a)] to-[var(--accent-b)] text-black font-semibold">Hire me</a>\n          <button onClick={()=> setMegaOpen(v=>!v)} className="px-3 py-2 text-sm border rounded-md">Explore</button>
-        </nav>
-        <button className="md:hidden p-2" onClick={()=> setOpen(!open)} aria-label="menu" data-cursor="hover">
-          {open ? <FiX size={20}/> : <FiMenu size={20}/>}
-        </button>
-      </div>
+    <header className="w-full border-b border-white/10 bg-black/50 backdrop-blur-md sticky top-0 z-50">
+      <nav className="container mx-auto px-6 flex items-center justify-between py-4">
+        <Link href="/" className="text-xl font-bold tracking-tight">
+          KDESA
+        </Link>
 
-      {open && (
-        <div className="md:hidden bg-black/80 border-t border-white/6">
-          <div className="container py-4 flex flex-col gap-3">
-            <Link href="/projects" onClick={()=> setOpen(false)}>Projects</Link>
-            <Link href="/about" onClick={()=> setOpen(false)}>About</Link>
-            <Link href="/contact" onClick={()=> setOpen(false)}>Contact</Link>
-            <a href="#" className="mt-2 inline-block px-4 py-2 rounded-full bg-gradient-to-r from-[var(--accent-a)] to-[var(--accent-b)] text-black font-semibold">Hire me</a>
+        <div className="flex items-center gap-6">
+          <Link href="/about" className="hover:underline">
+            About
+          </Link>
+          <Link href="/projects" className="hover:underline">
+            Projects
+          </Link>
+          <Link href="/contact" className="hover:underline">
+            Contact
+          </Link>
+          <button
+            onClick={() => setMegaOpen(!megaOpen)}
+            className="px-3 py-1 rounded-md bg-white/10 hover:bg-white/20 transition"
+          >
+            Menu
+          </button>
+        </div>
+      </nav>
+
+      {megaOpen && (
+        <div className="w-full bg-black/90 border-t border-white/10">
+          <div className="container mx-auto px-6 py-6 grid md:grid-cols-3 gap-6">
+            <div className="p-4">
+              <h4 className="font-semibold mb-2">Featured</h4>
+              <Link href="/projects/nebula-ui" className="block mb-1">
+                Nebula UI — Motion system
+              </Link>
+              <Link href="/projects/kdesa-landing" className="block mb-1">
+                KDESA Landing
+              </Link>
+            </div>
+
+            <div className="p-4">
+              <h4 className="font-semibold mb-2">Pages</h4>
+              <Link href="/about" className="block mb-1">
+                About
+              </Link>
+              <Link href="/projects" className="block mb-1">
+                Projects
+              </Link>
+              <Link href="/contact" className="block mb-1">
+                Contact
+              </Link>
+            </div>
+
+            <div className="p-4">
+              <h4 className="font-semibold mb-2">Connect</h4>
+              <a
+                href="https://github.com/kingkdesa"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block mb-1"
+              >
+                GitHub
+              </a>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block mb-1"
+              >
+                Twitter
+              </a>
+            </div>
           </div>
         </div>
       )}
     </header>
-
-
-  {megaOpen && (
-    <div className="w-full bg-black/90 border-t border-white/6">
-      <div className="container mx-auto px-6 py-6 grid md:grid-cols-3 gap-6">
-        <div className="p-4"><h4 className="font-semibold mb-2">Featured</h4><a href="/projects/nebula-ui" className="block mb-1">Nebula UI — Motion system</a><a href="/projects/kdesa-landing" className="block mb-1">KDESA Landing</a></div>
-        <div className="p-4"><h4 className="font-semibold mb-2">Case Studies</h4><a href="/projects/data-viz" className="block mb-1">Data Viz Suite</a></div>
-        <div className="p-4"><h4 className="font-semibold mb-2">Resources</h4><a href="#" className="block mb-1">Design tokens</a><a href="#" className="block mb-1">Motion utilities</a></div>
-      </div>
-    </div>
-  )}
-</header>
+  )
+}
