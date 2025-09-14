@@ -1,0 +1,1 @@
+export function prefetchLink(href){ if('requestIdleCallback' in window){ requestIdleCallback(()=> fetch(href, { method: 'GET', mode: 'no-cors' })); } else { fetch(href, { method: 'GET', mode: 'no-cors' }); } }
