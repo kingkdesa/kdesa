@@ -1,30 +1,24 @@
 "use client"
 
 import Image from "next/image"
-import Link from "next/link"
 
-export default function ImageBlock({ project, detailed }) {
+export default function ImageBlock({ src, alt, caption }) {
   return (
-    <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
-      <Image
-        src={project.image}
-        alt={project.title}
-        width={800}
-        height={500}
-        className="w-full object-cover"
-      />
-      <div className="p-6">
-        <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-        <p className="text-gray-300 mb-4">{project.description}</p>
-        {!detailed && (
-          <Link
-            href={`/projects/${project.slug}`}
-            className="text-primary-400 hover:underline"
-          >
-            View project →
-          </Link>
-        )}
+    <figure className="my-8">
+      <div className="relative w-full h-[400px] rounded-2xl overflow-hidden shadow-lg">
+        <Image
+          src={src}
+          alt={alt || "Project image"}
+          fill
+          className="object-cover hover:scale-105 transition-transform duration-500"
+          priority
+        />
       </div>
-    </div>
+      {caption && (
+        <figcaption className="mt-3 text-sm text-center text-gray-400">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
   )
 }
